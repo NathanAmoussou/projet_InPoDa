@@ -1,0 +1,61 @@
+def get_tweet_nettoyé(self):
+        """Retourne le text du tweet """
+        text_non_traité = tweet["text"] # stock le text du tweet dans une variable local
+        text_traité = re.sub("[^A-Z0-9 @&é\"\'(§è!çà)-#°]", "", text_non_traité, 0, re.IGNORECASE)
+        # stock le text du tweet (text_non_traité) et le nettoie (enlève les caractères spéciaux)
+        return text_traité
+
+
+def EnvoieVersZoneDAterrissage(tweet):
+    """Récupère un tweet,
+    écrit le tweet dans le fichier zone_d'atterissage.txt."""
+    pass
+
+
+def RéinitZoneDAterrissage():
+    """UNIQUEMENT POUR LE DÉVELOPPEMENT
+    Supprime tout le text du fichier zone_d'atterissage.txt."""
+    pass
+
+
+class Tweet:
+    def __init__(self, auteur, text, hashtags, mentions):
+        self.auteur = auteur
+        self.text = text
+        self.hashtags = hashtags
+        self.mentions = mentions
+
+
+    def get_hashtags(self):
+        """Retourne les hashtags du tweet dans une liste."""
+        temp = [] # liste temporaire vide pour stocker les #
+        for i in range(len(self.hashtags)):
+        # range(len(self.hashtags)) retourne un range de 0 jusqu'à la taille de la liste de dictionnaire des # (la liste du fichier json du tweet en question)
+            temp.append(self.hashtags[i]['tag'])
+            # ajoute à temp la valeur 'tag' du dictionnaire numéro i (c-à-d le text du #)
+        return temp
+
+
+    def get_mentions(self):
+        """Retourne la liste des utilisateurs mentionnés."""
+        temp = []
+        for i in range(len(self.mentions)):
+            temp.append(self.mentions[i]["username"])
+        return temp
+
+def get_hashtags(self):
+        """Retourne les hashtags du tweet dans une liste."""
+        temp = [] # liste temporaire vide pour stocker les #
+        for i in range(len(self.hashtags)):
+        # range(len(self.hashtags)) retourne un range de 0 jusqu'à la taille de la liste de dictionnaire des # (la liste du fichier json du tweet en question)
+            temp.append(self.hashtags[i]['tag'])
+            # ajoute à temp la valeur 'tag' du dictionnaire numéro i (c-à-d le text du #)
+        return temp
+
+
+    def get_mentions(self):
+        """Retourne la liste des utilisateurs mentionnés."""
+        temp = []
+        for i in range(len(self.mentions)):
+            temp.append(self.mentions[i]["username"])
+        return temp
