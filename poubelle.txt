@@ -59,3 +59,15 @@ def get_hashtags(self):
         for i in range(len(self.mentions)):
             temp.append(self.mentions[i]["username"])
         return temp
+
+
+"""if "hashtags" in hashtags: # si dict de clé "#" est dans dict "entities", donc si il y a des #
+            self.hashtags = [i["tag"] for i in hashtags["hashtags"]]
+            # alors l'attribut # de l'instance est une liste des #
+        else:
+            self.hashtags = [] # sinon l'attribut # de l'instance est une liste vide"""
+        
+        """if "mentions" in mentions: # même mécanisme que pour l'attribut # mais cette fois-ci avec les mentions
+            self.mentions = [i["username"] for i in mentions["mentions"]]
+        else:
+            self.mentions = []"""

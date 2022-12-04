@@ -1,0 +1,20 @@
+{'auteur': 1421616335700824064, 'text': 'Goumin des éléphants joueurs la mme fatigue mme  #twitter225', 'hashtags': ['twitter225'], 'mentions': []}
+{'auteur': 1421599703116943360, 'text': '@ericbailly24 @maxigr04del  mes tontons vous avez fait votre part , JO prochain on ira en demi final au moins. BRAVO à vous . #SupportriceMazo #domie #CIV', 'hashtags': ['SupportriceMazo', 'domie', 'CIV'], 'mentions': ['ericbailly24', 'maxigr04del']}
+{'auteur': 1421599163561742336, 'text': 'Ah oui le sommeil là sera compliqué. #CIV  est éliminé des JO , Ahi on peut faire ça ?', 'hashtags': ['CIV'], 'mentions': []}
+{'auteur': 1421591889095057408, 'text': '31 juillet , journée internationale de la femme africaine #jifa', 'hashtags': ['jifa'], 'mentions': []}
+{'auteur': 1421582795294617600, 'text': 'Le pedigree  https://t.co/D3Rv7A2BOF', 'hashtags': [], 'mentions': []}
+{'auteur': 1421581383454052352, 'text': '@isabelle170516 @leonna_julie @Steiner2502 Vous avez tt à fait raison! le silence incompréhensible du gouver-noument et des merdias sur ce très important et dramatique sujet prouve de manière irréfutable leur implication à ce plan  diabolique maquillé!', 'hashtags': [], 'mentions': ['isabelle170516', 'leonna_julie', 'Steiner2502']}
+{'auteur': 1421575939700445184, 'text': '@LynLyna12 @leonna_julie La grande muette continue et continuera de le rester!  part quelques irréductibles à la retraite?', 'hashtags': [], 'mentions': ['LynLyna12', 'leonna_julie']}
+{'auteur': 1421569996858269696, 'text': 'Under wsh ', 'hashtags': [], 'mentions': []}
+{'auteur': 1421563798503272448, 'text': "Les bains d'apollon #versailles #nocturne #appollon à Chteau de Versailles https://t.co/SFGXP06r61", 'hashtags': ['versailles', 'nocturne', 'appollon'], 'mentions': []}
+{'auteur': 1421562928176803840, 'text': "@leonna_julie Le rdv aujourd'hui aura  tenu ses promesses! Pour les problèmes de sommeil  1 cachet à la mélatonine 1,80 mg et je dors comme un bébé!  Réveil en pleine forme assuré! Et sans acoutumances, pas comme avec ces béquilles chimiques!Bonne soirée Julie! https://t.co/F6zvVfWwAf", 'hashtags': [], 'mentions': ['leonna_julie']}
+{'auteur': 1421560592775761920, 'text': '@miliemelo82 @kilianbridoux @LeMeneec il est temps de laisser mijoter', 'hashtags': [], 'mentions': ['miliemelo82', 'kilianbridoux', 'LeMeneec']}
+{'auteur': 1421558089761935360, 'text': "@Polo82810715 @lrestistant73 Un mouton c'est  bien plus intelligent que toi! ", 'hashtags': [], 'mentions': ['Polo82810715', 'lrestistant73']}
+{'auteur': 1421551384512585728, 'text': "I'm at Gardens of Versailles in Versailles, le-de-France https://t.co/fG7Q40cjWk", 'hashtags': [], 'mentions': []}
+{'auteur': 1421550148061212672, 'text': 'Jungle Cruise https://t.co/JyM8WQjz4p (@ UGC Cyrano in Versailles, le-de-France) https://t.co/ts0FrwWU8W', 'hashtags': [], 'mentions': []}
+{'auteur': 1421547651171078144, 'text': '@Pauluskupa ', 'hashtags': [], 'mentions': ['Pauluskupa']}
+{'auteur': 1421499497620836352, 'text': '@anniemacmanus legend!!!!', 'hashtags': [], 'mentions': ['anniemacmanus']}
+{'auteur': 1421499329974579200, 'text': '@yebbasmith @anniemacmanus ', 'hashtags': [], 'mentions': ['yebbasmith', 'anniemacmanus']}
+{'auteur': 1421487092023050240, 'text': 'Vient de publier une photo à Quelquepart ... https://t.co/fWNqGJosAA', 'hashtags': [], 'mentions': []}
+{'auteur': 1421472953980571648, 'text': '@AzmiAnees3 He was my lovers accomplice', 'hashtags': [], 'mentions': ['AzmiAnees3']}
+{'auteur': 1421429486432686080, 'text': 'Le gardien lui parle non ? https://t.co/e3WewDSQOJ', 'hashtags': [], 'mentions': []}
