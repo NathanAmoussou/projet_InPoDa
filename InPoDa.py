@@ -1,12 +1,18 @@
+# IMPORT
+
 import json # pour gérer le df
 import regex as re # pour nettoyer le text des tweets
 
+
+# DATA D'EXEMPLE
 
 fic = open('versailles_tweets_100.json', 'r')
 df = json.load(fic)
 fic.close()
 liste_tweets = [] # stocke les objets Tweet
 
+
+# CLASS PRINCIPAL
 
 class Tweet:
     def __init__(self, auteur, text, hashtags=[], mentions=[]):
@@ -39,6 +45,17 @@ class Tweet:
         else:
             print("Ce tweet ne contient pas de mentions.")
 
+
+# ITERATIONS DE LA CLASSE PRINCIPALE
+
+for tweet in df:
+    try:
+        liste_tweets.append(Tweet(tweet['_id'], tweet['text'], tweet['entities'], tweet['entities']))
+    except:
+        liste_tweets.append(Tweet(tweet['_id'], tweet['text']))
+
+
+# FONCTIONS
 
 def reset_zone_datterissage():
     """Supprime tout le text du fichier zone_d'atterissage.txt."""
@@ -138,7 +155,7 @@ def get_nb_posts_per_hashtag(hashtag):
         print("Il n'y a pas de tweet contenant le hashtag", hashtag, "\b.")
 
 
-def get_posts_per_mentions(mention):
+def get_posts_per_mention(mention):
     """Affiche les tweets contenant la mention."""
     temp = []
     for tweet in liste_tweets:
@@ -179,11 +196,23 @@ def get_mentions_per_user(user):
         print("L'utilisateur", user, "n'a fait aucune mention ou n'existe pas.")
 
 
+# CONSOLE
 
-for tweet in df:
-    try:
-        liste_tweets.append(Tweet(tweet['_id'], tweet['text'], tweet['entities'], tweet['entities']))
-    except:
-        liste_tweets.append(Tweet(tweet['_id'], tweet['text']))
-
-
+print("- InPoDa")
+print("- Taper « commandes » pour afficher la liste des commandes.")
+print("- Taper « quitter » pour quitter.")
+while True:
+    x = input("> ")
+    if x == "quitter":
+        break
+    if x == "commandes":
+        print("- Taper le numéro correspondant à la commande puis l'argument.")
+        print("- Par exemple : > 0 3 pour afficher le top 3 des hashtags les plus utilisés.")
+        print("- [0] Afficher le top [k] des hashtags les plus utilisés.")
+        print("- [1] Afficher le top [k] des mentions les plus utilisés.")
+        print("- [2] Afficher les posts d'un [utilisateur].")
+        print("- [3] Afficher le nombre de posts d'un [utilisateur].")
+        print("- [4] Afficher le nombre de posts contenant un [hashtag].")
+        print("- [5] Afficher le nombre de posts contenant une [mention].")
+        print("- [6] Afficher les utilisateurs ayant utilisé un [hashtag].")
+        print("- [7] Afficher les mentions d'un [utilisateur].")
