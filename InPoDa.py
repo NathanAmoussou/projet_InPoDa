@@ -77,6 +77,108 @@ def get_top_k_hashtags(k):
         print("Il n'y a pas", k, "hashtags différents. Essayer un nombre inférieur.")
 
 
+def get_top_k_mentions(k):
+    """Affiche le top k des utilisateurs les plus mentionné(e)s."""
+    temp = [x.mentions for x in liste_tweets]
+    temp = [x for y in temp for x in y]
+    temp2 = dict()
+    for i in temp:
+        if i not in temp2.keys():
+            temp2[i] = 1
+        else:
+            temp2[i] += 1
+    temp2 = list(map(list, temp2.items())) # transforme le dictionnaire temp en liste de listes
+    for x in temp2:
+        x[0], x[1] = x[1], x[0]
+    temp2.sort(reverse = True)
+    try:
+        a = temp2[k]
+        print("Top", k, "des utilisateurs les plus mentionné(e)s :")
+        for i in range(k):
+            print(temp2[i][1], "mentionné.e", temp2[i][0], "fois")
+    except:
+        print("Il n'y a pas", k, "utilisateurs mentionné(e)s différent(e)s. Essayer un nombre inférieur.")
+
+
+def get_posts_per_user(user):
+    """Affiche tous les tweets postés par l'utilisateur."""
+    temp = []
+    for tweet in liste_tweets:
+        if str(user) == tweet.auteur:
+            temp.append(tweet)
+    if bool(temp):
+        print("Voici l'ensemble des tweets de l'utilisateur", user, ":")
+        for x in temp:
+            print(">", x.text)
+    else:
+        print("L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
+
+
+def get_nb_posts_per_user(user):
+    """Affiche le nombre de tweets postés par l'utilisateur."""
+    temp = []
+    for tweet in liste_tweets:
+        if str(user) == tweet.auteur:
+            temp.append(tweet)
+    if bool(temp):
+        print(user, "a tweeté", len(temp), "fois.")
+    else:
+        print("L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
+
+
+def get_nb_posts_per_hashtag(hashtag):
+    """Affiche le nombre de tweet contenant le hashtag."""
+    temp = []
+    for tweet in liste_tweets:
+        if hashtag in tweet.hashtags:
+            temp.append(tweet)
+    if bool(temp):
+        print("Il y a", len(temp), "tweet(s) mentionnant le hashtag", hashtag, "\b.")
+    else:
+        print("Il n'y a pas de tweet contenant le hashtag", hashtag, "\b.")
+
+
+def get_posts_per_mentions(mention):
+    """Affiche les tweets contenant la mention."""
+    temp = []
+    for tweet in liste_tweets:
+        if mention in tweet.mentions:
+            temp.append(tweet)
+    if bool(temp):
+        print("Voici l'ensemble des tweets mentionnant", mention, ":")
+        for x in temp:
+            print(">", x.text)
+    else:
+        print("Il n'y a pas de tweet mentionnant", mention, "\b.")
+
+
+def get_users_per_hashtag(hashtag):
+    """Affiche les utilisateurs ayant utilisé le hashtag spécifié."""
+    temp = []
+    for tweet in liste_tweets:
+        if hashtag in tweet.hashtags:
+            temp.append(tweet)
+    if bool(temp):
+        print("Utilisateur(s) ayant utilisé le hashtag", hashtag, ":")
+        for x in temp:
+            print(">", x.auteur)
+    else:
+        print("Il n'y a pas d'utilisateur ayant utilisé le hashtag", hashtag, "\b.")
+
+
+def get_mentions_per_user(user):
+    """Affiche les mentions de l'utilisateur spécifié."""
+    for tweet in liste_tweets:
+        if tweet.auteur == str(user):
+            temp = tweet
+    try:
+        print("Mention(s) de l'utilisateur", user, ":")
+        for x in temp.mentions:
+            print(">", x)
+    except:
+        print("L'utilisateur", user, "n'a fait aucune mention ou n'existe pas.")
+
+
 
 for tweet in df:
     try:
@@ -84,5 +186,4 @@ for tweet in df:
     except:
         liste_tweets.append(Tweet(tweet['_id'], tweet['text']))
 
-fill_zone_datterissage()
-get_top_k_hashtags(20)
+
