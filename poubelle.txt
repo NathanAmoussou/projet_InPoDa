@@ -71,3 +71,190 @@ def get_hashtags(self):
             self.mentions = [i["username"] for i in mentions["mentions"]]
         else:
             self.mentions = []"""
+
+
+            # À rendre mercredi 12:50 à 13:50
+
+import pandas as pd # pour gérer le df et les tweets
+import re # pour supprimer les caractères spéciaux lors du nettoyage du tweet
+import ast
+
+df = pd.read_json('versailles_tweets_100.json')
+
+class Tweet:
+    def __init__(self, auteur, text, hashtags, mentions):
+        self.auteur = auteur
+        self.text = re.sub("[^a-zA-z0-9 @&é\"\'(§è!çà)\-#°\^¨$*€¥ôÔùÙ‰%`@#£=≠±+:÷\\/…•.;∞¿?,≤≥><]", "", text, 0)
+        # problème ici car le Ï est supprimé par exemple, demander à Élie
+        # fait que l'attribut text de l'instance est une version "nettoyé" du text en entrée
+        try:
+            self.hashtags = [i["tag"] for i in hashtags["hashtags"]]
+            # si dict de clé "#" est dans dict "entities", donc si il y a des #
+            # alors l'attribut # de l'instance est une liste des #
+        except:
+            self.hashtags = []
+            # sinon l'attribut # de l'instance est une liste vide
+        try:
+            self.mentions = [i["username"] for i in mentions["mentions"]]
+        except:
+            self.mentions = []
+            # même mécanisme que pour l'attribut # mais cette fois-ci avec les mentions
+
+        def get_sentiment(self):
+            pass
+
+
+def push_to_zone_datterissage(tweet):
+    """Envoie le tweet propre dans le fichier zone_d'atterissage.txt."""
+    fic = open("zone_d'atterissage.txt", "a")
+    fic.write(str(tweet.__dict__)+"\n")
+    fic.close()
+
+
+def reset_zone_datterissage():
+    """Supprime tout le text du fichier zone_d'atterissage.txt."""
+    open("zone_d'atterissage.txt", "w").close()
+
+
+def create_new_df(fichier):
+    """Remplit le df2 avec les tweets (les lignes) du fichier zone_d'atterissage.txt."""
+    global df2
+    df2 = pd.DataFrame()
+    fic = open(fichier, 'r')
+    for ligne in fic.readlines():
+        df2 = df2.append(ast.literal_eval(ligne), ignore_index=True)
+        # ast.literal_eval() permet de faire passer les lignes de zone_d'atterissage.txt comme
+        # des dict et non comme des str
+    fic.close()
+
+
+def get_all_hashtags():
+    """Crée une liste de tous les hashtags présents dans la zone d'atterissage."""
+    global liste_des_hashtags
+    liste_des_hashtags = df2["hashtags"].values.tolist()
+    liste_des_hashtags = [hashtags for sous_liste in liste_des_hashtags for hashtags in sous_liste] # applati la liste
+
+
+def get_all_users():
+    """Crée une liste de tous les utilisateurs présents dans la zone d'atterissage."""
+    global liste_des_utilisateurs
+    liste_des_utilisateurs = df2["auteur"].values.tolist()
+
+
+def get_all_mentions():
+    """Crée une liste de tous les utilisateurs mentionnés présents dans la zone d'atterissage."""
+    global liste_des_mentions
+    liste_des_mentions = df2["mentions"].values.tolist()
+    liste_des_mentions = [mentions for sous_liste in liste_des_mentions for mentions in sous_liste] # applati la liste
+
+
+def get_posts_per_users():
+    """Crée un dictionnaire de tous les post par utilisateurs."""
+    global liste_des_posts_par_utilisateurs
+    liste_des_posts_par_utilisateurs = dict()
+    for index, lignes in df2.iterrows():
+        if lignes['auteur'] not in liste_des_posts_par_utilisateurs.keys():
+            liste_des_posts_par_utilisateurs[lignes['auteur']] = lignes
+        else:
+            liste_des_posts_par_utilisateurs[lignes['auteur']] = lignes['auteur'], lignes
+
+
+def get_top_k_hashtags(k):
+    """Affiche le top k des hashtags les plus utilisé."""
+    get_all_hashtags()
+    temp = dict()
+    for i in liste_des_hashtags:
+        if i not in temp.keys():
+            temp[i] = 1
+        else:
+            temp[i] += 1
+    temp = list(map(list, temp.items())) # transforme le dictionnaire temp en liste de listes
+    for x in temp:
+        x[0], x[1] = x[1], x[0]
+    temp.sort(reverse = True)
+    try:
+        a = temp[k]
+        print("Top", k, "des hashtags les plus utilisés :")
+        for i in range(k):
+            print(temp[i][1], "utilisé", temp[i][0], "fois")
+    except:
+        print("Il n'y a pas", k, "hashtags différents. Essayer un nombre inférieur.")
+
+
+def get_top_k_users(k):
+    """Affiche le top k des utilisateurs ayant le plus posté (même structure que get_top_k_hashtags)."""
+    get_all_users()
+    temp = dict()
+    for i in liste_des_utilisateurs:
+        if i not in temp.keys():
+            temp[i] = 1
+        else:
+            temp[i] += 1
+    temp = list(map(list, temp.items()))
+    for x in temp:
+        x[0], x[1] = x[1], x[0]
+    temp.sort(reverse = True)
+    try:
+        a = temp[k]
+        print("Top", k, "des utilisateurs ayant le plus posté :")
+        for i in range(k):
+            print(temp[i][1], "a posté", temp[i][0], "fois")
+    except:
+        print("Il n'y a pas", k, "utilisateurs différents. Essayer un nombre inférieur.")
+
+
+def get_top_k_mentions(k):
+    """Affiche le top k des utilisateurs les plus mentionné(e)s."""
+    get_all_mentions()
+    temp = dict()
+    for i in liste_des_mentions:
+        if i not in temp.keys():
+            temp[i] = 1
+        else:
+            temp[i] += 1
+    temp = list(map(list, temp.items())) # transforme le dictionnaire temp en liste de listes
+    for x in temp:
+        x[0], x[1] = x[1], x[0]
+    temp.sort(reverse = True)
+    try:
+        a = temp[k]
+        print("Top", k, "des utilisateurs les plus mentionné(e)s :")
+        for i in range(k):
+            print(temp[i][1], "mentionné.e", temp[i][0], "fois")
+    except:
+        print("Il n'y a pas", k, "utilisateurs mentionné(e)s différent(e)s. Essayer un nombre inférieur.")
+
+
+def get_nb_posts_per_users(user):
+    """Affiche le nombre de post(s) de l'utilisateur."""
+    get_posts_per_users()
+    print("L'utilisateur", user, "a posté", len(liste_des_posts_par_utilisateurs[user]) % 3, "fois.")
+    # % 3 car le dict qui stock les tweets par user stock : user: user, text, #, mentions (donc 4 éléments)
+
+
+# MAINLOOP
+reset_zone_datterissage()
+# Pour toutes les lignes (donc tous les tweets) de df, création d'un objet de la classe Tweet
+# pour la ligne puis envoie de l'objet dans la zone d'atterissage
+for index, lignes in df.iterrows():
+    push_to_zone_datterissage(Tweet(lignes["_id"], lignes["text"], lignes["entities"], lignes["entities"]))
+create_new_df("zone_d\'atterissage.txt")
+#get_all_hashtags()
+#get_all_users()
+
+
+
+temp_list = []
+    for index, lignes in df2.iterrows():
+        
+        temp = lignes['hashtags']
+        
+        for x in temp:
+            temp_list.append(x)
+        #temp = ast.literal_eval(temp)
+        """if temp == True:
+            for x in temp:
+                if x not in liste_des_posts_par_hashtags.keys():
+                    liste_des_posts_par_hashtags[x] = lignes
+                else:
+                    liste_des_posts_par_hashtags[x] = liste_des_posts_par_hashtags[x], lignes"""
