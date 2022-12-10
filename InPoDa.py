@@ -73,7 +73,7 @@ def fill_zone_datterissage():
 
 
 def get_top_k_hashtags(k):
-    """Affiche le top k des hashtags les plus utilisé."""
+    """Affiche le top k des hashtags les plus utilisé dans un bar chart."""
     temp = [x.hashtags for x in liste_tweets]
     temp = [x for y in temp for x in y]
     temp2 = dict()
@@ -118,9 +118,16 @@ def get_top_k_mentions(k):
     temp2.sort(reverse = True)
     try:
         a = temp2[k]
-        print("- Top", k, "des utilisateurs les plus mentionné(e)s :")
-        for i in range(k):
-            print("    -", temp2[i][1], "mentionné.e", temp2[i][0], "fois")
+        temp3 = [x[0] for x in temp2[:k]]
+        temp4 = [y[1] for y in temp2[:k]]
+        plt.bar(temp4, temp3)
+        plt.xlabel("Mention")
+        plt.ylabel("Nombre d'utilisation")
+        plt.title("Top {} des mentions les plus utilisées".format(k))
+        plt.show()
+        #print("- Top", k, "des utilisateurs les plus mentionné(e)s :")
+        #for i in range(k):
+            #print("    -", temp2[i][1], "mentionné.e", temp2[i][0], "fois")
     except:
         print("- Il n'y a pas", k, "utilisateurs mentionné(e)s différent(e)s. Essayer un nombre inférieur.")
 
