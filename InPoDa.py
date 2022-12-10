@@ -87,11 +87,11 @@ def get_top_k_hashtags(k):
     temp2.sort(reverse = True)
     try:
         a = temp2[k]
-        print("Top", k, "des hashtags les plus utilisés :")
+        print("- Top", k, "des hashtags les plus utilisés :")
         for i in range(k):
-            print(temp2[i][1], "utilisé", temp2[i][0], "fois")
+            print("    -", temp2[i][1], "utilisé", temp2[i][0], "fois")
     except:
-        print("Il n'y a pas", k, "hashtags différents. Essayer un nombre inférieur.")
+        print("- Il n'y a pas", k, "hashtags différents. Essayer un nombre inférieur.")
 
 
 def get_top_k_mentions(k):
@@ -110,11 +110,11 @@ def get_top_k_mentions(k):
     temp2.sort(reverse = True)
     try:
         a = temp2[k]
-        print("Top", k, "des utilisateurs les plus mentionné(e)s :")
+        print("- Top", k, "des utilisateurs les plus mentionné(e)s :")
         for i in range(k):
-            print(temp2[i][1], "mentionné.e", temp2[i][0], "fois")
+            print("    -", temp2[i][1], "mentionné.e", temp2[i][0], "fois")
     except:
-        print("Il n'y a pas", k, "utilisateurs mentionné(e)s différent(e)s. Essayer un nombre inférieur.")
+        print("- Il n'y a pas", k, "utilisateurs mentionné(e)s différent(e)s. Essayer un nombre inférieur.")
 
 
 def get_posts_per_user(user):
@@ -124,11 +124,11 @@ def get_posts_per_user(user):
         if str(user) == tweet.auteur:
             temp.append(tweet)
     if bool(temp):
-        print("Voici l'ensemble des tweets de l'utilisateur", user, ":")
+        print("- Voici l'ensemble des tweets de l'utilisateur", user, ":")
         for x in temp:
-            print(">", x.text)
+            print("    -", x.text)
     else:
-        print("L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
+        print("- L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
 
 
 def get_nb_posts_per_user(user):
@@ -138,9 +138,9 @@ def get_nb_posts_per_user(user):
         if str(user) == tweet.auteur:
             temp.append(tweet)
     if bool(temp):
-        print(user, "a tweeté", len(temp), "fois.")
+        print("-", user, "a tweeté", len(temp), "fois.")
     else:
-        print("L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
+        print("- L'utilisateur n'a pas tweeté ou le nom d'utilisateur est incorrect.")
 
 
 def get_nb_posts_per_hashtag(hashtag):
@@ -150,9 +150,9 @@ def get_nb_posts_per_hashtag(hashtag):
         if hashtag in tweet.hashtags:
             temp.append(tweet)
     if bool(temp):
-        print("Il y a", len(temp), "tweet(s) mentionnant le hashtag", hashtag, "\b.")
+        print("- Il y a", len(temp), "tweet(s) mentionnant le hashtag", hashtag, "\b.")
     else:
-        print("Il n'y a pas de tweet contenant le hashtag", hashtag, "\b.")
+        print("- Il n'y a pas de tweet contenant le hashtag", hashtag, "\b.")
 
 
 def get_posts_per_mention(mention):
@@ -162,11 +162,11 @@ def get_posts_per_mention(mention):
         if mention in tweet.mentions:
             temp.append(tweet)
     if bool(temp):
-        print("Voici l'ensemble des tweets mentionnant", mention, ":")
+        print("- Voici l'ensemble des tweets mentionnant", mention, ":")
         for x in temp:
-            print(">", x.text)
+            print("    -", x.text)
     else:
-        print("Il n'y a pas de tweet mentionnant", mention, "\b.")
+        print("- Il n'y a pas de tweet mentionnant", mention, "\b.")
 
 
 def get_users_per_hashtag(hashtag):
@@ -176,11 +176,11 @@ def get_users_per_hashtag(hashtag):
         if hashtag in tweet.hashtags:
             temp.append(tweet)
     if bool(temp):
-        print("Utilisateur(s) ayant utilisé le hashtag", hashtag, ":")
+        print("- Utilisateur(s) ayant utilisé le hashtag", hashtag, ":")
         for x in temp:
-            print(">", x.auteur)
+            print("    -", x.auteur)
     else:
-        print("Il n'y a pas d'utilisateur ayant utilisé le hashtag", hashtag, "\b.")
+        print("- Il n'y a pas d'utilisateur ayant utilisé le hashtag", hashtag, "\b.")
 
 
 def get_mentions_per_user(user):
@@ -189,11 +189,13 @@ def get_mentions_per_user(user):
         if tweet.auteur == str(user):
             temp = tweet
     try:
-        print("Mention(s) de l'utilisateur", user, ":")
+        if len(temp) == 0:
+            print("- L'utilisateur", user, "n'a fait aucune mention ou n'existe pas.")
+        print("- Mention(s) de l'utilisateur", user, ":")
         for x in temp.mentions:
-            print(">", x)
+            print("    -", x)
     except:
-        print("L'utilisateur", user, "n'a fait aucune mention ou n'existe pas.")
+        print("- L'utilisateur", user, "n'a fait aucune mention ou n'existe pas.")
 
 
 # CONSOLE
@@ -206,13 +208,43 @@ while True:
     if x == "quitter":
         break
     if x == "commandes":
-        print("- Taper le numéro correspondant à la commande puis l'argument.")
-        print("- Par exemple : > 0 3 pour afficher le top 3 des hashtags les plus utilisés.")
-        print("- [0] Afficher le top [k] des hashtags les plus utilisés.")
-        print("- [1] Afficher le top [k] des mentions les plus utilisés.")
-        print("- [2] Afficher les posts d'un [utilisateur].")
-        print("- [3] Afficher le nombre de posts d'un [utilisateur].")
-        print("- [4] Afficher le nombre de posts contenant un [hashtag].")
-        print("- [5] Afficher le nombre de posts contenant une [mention].")
-        print("- [6] Afficher les utilisateurs ayant utilisé un [hashtag].")
-        print("- [7] Afficher les mentions d'un [utilisateur].")
+        print("- [0] Afficher le top k des hashtags les plus utilisés.")
+        print("- [1] Afficher le top k des mentions les plus utilisés.")
+        print("- [2] Afficher les posts d'un utilisateur.")
+        print("- [3] Afficher le nombre de posts d'un utilisateur.")
+        print("- [4] Afficher le nombre de posts contenant un hashtag.")
+        print("- [5] Afficher les posts contenant une mention.")
+        print("- [6] Afficher les utilisateurs ayant utilisé un hashtag.")
+        print("- [7] Afficher les mentions d'un utilisateur.")
+    if x == "0":
+        print("- Affichage du top k des hashtags les plus utilisés.")
+        k = input("> Valeur de k : ")
+        get_top_k_hashtags(int(k))
+    if x == "1":
+        print("- Affichage du top k des mentions les plus utilisés.")
+        k = input("> Valeur de k : ")
+        get_top_k_mentions(int(k))
+    if x == "2":
+        print("- Affichage des posts d'un utilisateur.")
+        k = input("> Nom de l'utilisateur : ")
+        get_posts_per_user(k)
+    if x == "3":
+        print("- Affichage du nombre de posts d'un utilisateur.")
+        k = input("> Nom de l'utilisateur : ")
+        get_nb_posts_per_user(k)
+    if x == "4":
+        print("- Affichage du nombre de posts contenant un hashtag.")
+        k = input("> Hashtag cherché : ")
+        get_nb_posts_per_hashtag(k)
+    if x == "5":
+        print("- Affichage des posts contenant une mention.")
+        k = input("> Mention cherché : ")
+        get_posts_per_mention(k)
+    if x == "6":
+        print("- Affichage des utilisateurs ayant utilisé un hashtag.")
+        k = input("> Hashtag cherché : ")
+        get_users_per_hashtag(k)
+    if x == "7":
+        print("- Affichage des mentions d'un utilisateur.")
+        k = input("> Utilisateur cherché : ")
+        get_mentions_per_user(k)
