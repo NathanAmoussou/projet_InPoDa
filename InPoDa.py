@@ -2,6 +2,7 @@
 
 import json # pour gérer le df
 import regex as re # pour nettoyer le text des tweets
+import matplotlib.pyplot as plt # pour afficher des graphiques
 
 
 # DATA D'EXEMPLE
@@ -87,9 +88,16 @@ def get_top_k_hashtags(k):
     temp2.sort(reverse = True)
     try:
         a = temp2[k]
-        print("- Top", k, "des hashtags les plus utilisés :")
-        for i in range(k):
-            print("    -", temp2[i][1], "utilisé", temp2[i][0], "fois")
+        #print("- Top", k, "des hashtags les plus utilisés :")
+        #for i in range(k):
+            #print("    -", temp2[i][1], "utilisé", temp2[i][0], "fois")
+        temp3 = [x[0] for x in temp2[:k]]
+        temp4 = [y[1] for y in temp2[:k]]
+        plt.bar(temp4, temp3)
+        plt.xlabel("Hashtag")
+        plt.ylabel("Nombre d'utilisation")
+        plt.title("Top {} des hashtags les plus utilisés".format(k))
+        plt.show()
     except:
         print("- Il n'y a pas", k, "hashtags différents. Essayer un nombre inférieur.")
 
