@@ -497,3 +497,28 @@ reset_zone_datterissage()
 for index, lignes in df.iterrows():
     push_to_zone_datterissage(Tweet(lignes["_id"], lignes["text"], lignes["entities"], lignes["entities"]))
 create_new_df("zone_d\'atterissage.txt")
+
+
+
+[{"domain" : {"id" : "6", "name" : "Sports Event"}, "entity" : {"id" : "1103026158382141440", "name" : "Tokyo 2020 Summer Olympics", "description" : "Tokyo 2020 Summer Olympics "}}]
+{'domain': {'id': '6', 'name': 'Sports Event'}, 'entity': {'id': '1103026158382141440', 'name': 'Tokyo 2020 Summer Olympics', 'description': 'Tokyo 2020 Summer Olympics '}}, {'domain': {'id': '10', 'name': 'Person', 'description': 'Named people in the world like Nelson Mandela'}, 'entity': {'id': '733774054713217024', 'name': 'Max Gradel'}}, {'domain': {'id': '10', 'name': 'Person', 'description': 'Named people in the world like Nelson Mandela'}, 'entity': {'id': '733774784014622720', 'name': 'Eric Bailly'}}, {'domain': {'id': '60', 'name': 'Athlete', 'description': 'An athlete in the world, like Serena Williams or Lionel Messi'}, 'entity': {'id': '733774054713217024', 'name': 'Max Gradel'}}, {'domain': {'id': '60', 'name': 'Athlete', 'description': 'An athlete in the world, like Serena Williams or Lionel Messi'}, 'entity': {'id': '733774784014622720', 'name': 'Eric Bailly'}}
+
+def affichage_tweets_disponibles():
+    fic = open('zone_d\'atterissage.txt', 'r')
+    i = 0
+    print("- Tweets disponibles : ")
+    for ligne in fic.readlines():
+        print(str("- [{}] {}".format(i, ligne)).strip("\n"))
+        i += 1
+    fic.close()
+
+if x == "a":
+        print("- Affichage de l'auteur d'un tweet.")
+        affichage_tweets_disponibles()
+        k = input("> Numéro du tweet à afficher l'auteur : ")
+
+print("- [a] Afficher l'auteur d'un tweet.")
+        print("- [b] Afficher la liste des hashtags d'un tweet.")
+        print("- [c] Afficher la liste des mentions d'un tweet.")
+        print("- [d] Afficher le sentiment d'un tweet.")
+        print("- [e] Afficher la liste des topics d'un tweet.")
