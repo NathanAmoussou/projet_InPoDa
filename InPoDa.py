@@ -29,9 +29,9 @@ class Tweet:
         except:
             self.mentions = []
         try:
-            temp = [i for i in topics]
-            temp2 = []
-            temp3 = []
+            temp = [i for i in topics] # crée une liste avec les dictionnaires de dictionnaires des topics
+            temp2 = [] # crée une liste dans laquelle on ajoutera les sous-dictionnaires de clé 'domain' de temp
+            temp3 = [] # crée une liste dans laquelle on ajoutera les valeurs de clé 'name' stocké dans les sous-dict 'domain'
             for x in temp:
                 for y in x.keys():
                     if y == 'domain':
@@ -40,12 +40,14 @@ class Tweet:
                 for y in x .keys():
                     if y == 'name':
                         temp3.append(x[y])
-            self.topics = temp3
+            self.topics = temp3 # enfin, topics devient cette liste de valeurs
         except:
-            self.topics = []
+            self.topics = [] # sinon une liste vide
         self.sentiment = (round(rd.uniform(-1, 1), 2), round(rd.uniform(0, 1), 2)) # (polarité, subjectivité)
 
 
+    # les méthodes de Tweet ne sont en fait pas directement affichable par la console, bien qu'on les ai créé
+    # on n'était pas sûr de ce que demandait l'énoncé à ce niveau là
     def get_auteur(self):
         """Retourne l'auteur du tweet."""
         print("- Auteur.e du tweet :", self.auteur)
@@ -92,6 +94,8 @@ class Tweet:
 
 # ITERATIONS DE LA CLASSE PRINCIPALE
 
+# voici la structure à laquelle on fait référence dans le compte-rendu
+# elle permet d'assigner une liste vide uniquement pour la propriété vide, et non pour les trois propriétés hashtags, mentions et topics en même temps
 for tweet in df:
     try:
         liste_tweets.append(Tweet(tweet['_id'], tweet['text'], tweet['entities'], tweet['entities'], tweet['context_annotations']))
